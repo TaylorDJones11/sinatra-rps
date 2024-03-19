@@ -11,13 +11,35 @@ get('/') do
 end
 
 get('/rock') do
+  @user_choice = 'rock'
+  @computer_choice = ['rock', 'paper', 'scissors'].sample
+  @result = determine_result(@user_choice, @computer_choice)
   erb(:rock)
 end
 
 get('/paper') do
+  @user_choice = 'paper'
+  @computer_choice = ['rock', 'paper', 'scissors'].sample
+  @result = determine_result(@user_choice, @computer_choice)
   erb(:paper)
 end
 
 get('/scissors') do
+@user_choice = 'scissors'
+@computer_choice =  ['rock', 'paper', 'scissors'].sample
+@result = determine_result(@user_choice, @computer_choice)
+
   erb(:scissors)
+end
+
+def determine_result(user_choice, computer_choice)
+  if user_choice == computer_choice
+    result = "It's a tie!"
+  elsif (user_choice == 'rock' && computer_choice == 'scissors') ||
+    (user_choice == 'paper' && computer_choice == 'rock') ||
+    (user_choice == 'scissors' && computer_choice == 'paper')
+    result = "We won!"
+  else 
+    result = "We lost!"
+  end
 end
